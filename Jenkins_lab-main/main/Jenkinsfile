@@ -1,28 +1,28 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        sh 'g++ -o new_exec new.cpp'
-        sh 'echo "Build Stage Successul"'
-      }
+    agent any
+
+    stages {
+        stage('Build') {
+    steps {
+            sh 'invalid_command'
+        }
     }
-    stage('Test') {
-      steps {
-          sh './your_executable'
-          sh 'echo "Test Stage Successful"'
-      }
+
+        stage('Test') {
+            steps {
+                sh './output'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'deploy'
+            }
+        }
     }
-    stage('Deploy') {
-      steps {
-        sh 'mvn deploy'
-        echo 'Deployment Successful'
-      }
+
+    post {
+        failure {
+            error 'Pipeline failed.'
+        }
     }
-  }
-  post {
-    failure {
-      echo 'Pipeline failed'
-    }
-  }
 }
